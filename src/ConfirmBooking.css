@@ -1,0 +1,49 @@
+#form {
+
+}
+
+#form .list_data > *{
+  border-radius: 0.5em;
+  border-color: black;
+  border-style: dotted;
+  padding: 0.2em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+
+#form .list_data > *:hover{
+  border-style: solid;
+  background-color: rgba(0,255,0,0.3);
+}
+
+#form .list_data > *.selected {
+  background-color: rgba(0,255,0,0.7);
+  cursor: not-allowed;
+  border-style: solid;
+}
+
+#form .list_input {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+#form .list_input > div {
+  display:flex;
+  flex-direction:row;
+  width: 50vw;
+}
+#form .list_input > div > *
+{
+  margin: 0 .5em 0 .5em;
+}
+#form .list_input > div > :nth-child(2) {
+  flex-grow: 2;
+  flex-basis: 0;
+  text-align: left;
+}
+#form .list_input > div > :nth-child(1) {
+  flex-grow: 8;
+  text-align: right;
+}
