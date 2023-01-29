@@ -2,14 +2,19 @@
 
 }
 
+#form .list_data{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 #form .list_data > *{
   border-radius: 0.5em;
   border-color: black;
   border-style: dotted;
   padding: 0.2em;
-  margin-left: 0.5em;
+  margin: 0.5em;
   cursor: pointer;
-  margin-right: 0.5em;
 }
 
 #form .list_data > *:hover{
@@ -136,7 +141,7 @@
 }
 
 #floating-panel{
-  background-color :rgba(0,255,0,0.9);
+  background-color :rgba(128,128,128,1);
 }
 #floating-panel.info{
   background-color :rgba(0,0,255,0.9);
@@ -154,4 +159,8 @@
   background-color: rgba(255, 255, 255, .9);
   border: .1em dotted black;
   border-radius: 1em;
+}
+
+#floating-panel .button:hover{
+  filter: invert(1);
 }

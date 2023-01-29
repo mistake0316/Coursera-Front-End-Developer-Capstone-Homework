@@ -42,6 +42,7 @@ const Form = () => {
     )
   );
   const [blured, setBlured] = useState({});
+  const [failSubmit, setFailubmit] = useState(false);
   const addBlur = (s:string)=>{
     const cp_blur:any = {...blured};
     cp_blur[s] = true;
@@ -55,15 +56,18 @@ const Form = () => {
     occasion: occasion==="",
   }
 
-  const error_message = Object.fromEntries(
-    Object.entries(blured)
-      .map(
-        ([key,isBlured])=>
-        (isBlured && (validFail as any)[key]) && [key, <span key={key} style={{color:"red"}}>{key} is not valid.</span>]
-      )
-      .filter(elem=>elem) // prevent fromEntries error
-  );
+  const checkError = (varName:string)=>{
+    if (!(varName in validFail))
+    {
+      throw(`check error fail, get ${varName} while only allow ${Object.keys(validFail)}`);
+    }
+    return ((failSubmit || (blured as any)[varName])
+           && (validFail as any)[varName]);
+  }
+
   const specialRequestRef = useRef<HTMLTextAreaElement>(null);
+
+  const [success, setSuccess] = useState(false);
 
   const result = {
     date:date.toLocaleDateString(),
@@ -103,9 +107,9 @@ const Form = () => {
     },
     [date]
   )
-  return <div id="form">
+  return <div id="form" style={{pointerEvents: success ? "none" : "auto"}}>
     <h1>Book a Table</h1>
-    <h2><label>Date</label></h2>
+    <h2>Date</h2>
     <div className="list_data">
     {dateListRender(
       new Date(),
@@ -114,7 +118,8 @@ const Form = () => {
       date
     )}
     </div>
-    <h2><label>Time</label></h2>
+    <h2>Time</h2>
+    {checkError("time") && <div style={{color:"red", margin:".5em"}}>please select time</div>}
     { // render time in that date
       !timeList ?
       <span>"No Available Time"</span> :
@@ -134,6 +139,7 @@ const Form = () => {
       </div>
     }
     <h2>People</h2>
+    {checkError("people") && <div style={{color:"red", margin:".5em"}}>No one addend?</div>}
     <div id="people-panel">
       {
         ["adult", "child", "baby"].map(
@@ -164,11 +170,12 @@ const Form = () => {
     <h2>Contact</h2>
     <div className="list_input">
       <div><input type="text" required={true} ref={contactRefs.name} placeholder="required" onBlur={()=>addBlur("name")}/><label>Name</label></div>
-      {(error_message as any).name}
+      {checkError("name") && <span style={{color:"red"}}>Please fill name</span>}
       <div><input type="email" required={true} ref={contactRefs.email} placeholder="required" onBlur={()=>addBlur("email")}/><label>Email</label></div>
-      {(error_message as any).email}
+      {checkError("email") && <span style={{color:"red"}}>Please give email in correct format</span>}
     </div>
     <h2>Occasion</h2>
+    {checkError("occasion") && <div style={{color:"red"}}>Please select the occasion</div>}
     <select id="Occasion" onChange={(e)=>setOccasion(e.target.value)} style={{textAlign:"right"}}>
       <option value="">-- Please select one of following. --</option>
       {["Birthday", "Anniversary", "Business", "None", "Other"].map(
@@ -186,12 +193,12 @@ const Form = () => {
         width:"50vw"
       }}
       ref={specialRequestRef}
-      placeholder="Please leave special information &#10;(e.g. cannot climb stair, allergy for peanuts, etc.)"
+      placeholder="Please leave special information if you have &#10;(e.g. cannot climb stair, allergy for peanuts, etc.)"
     >
     </textarea>
     <br/>
-    <button
-      onClick={ 
+    <button //submit button
+      onClick={
         ()=>{// generate "floating-panel"
           const already_render = document.getElementById("floating-panel")!==null;
           if(already_render)return null;
@@ -203,6 +210,7 @@ const Form = () => {
               ([key,..._])=>key
             );
           const has_error = errors.length > 0;
+          if(has_error)setFailubmit(true);
           setPanel && setPanel(
             <div
               id="floating-panel"
@@ -266,7 +274,8 @@ const Form = () => {
                         <div
                           className="button"
                           onClick={()=>{
-                            setPanel(submitResult(result))
+                            setPanel(submitResult(result));
+                            setSuccess(true);
                           }}
                         >
                           All correct!
@@ -318,7 +327,7 @@ const submitResult = (result:any)=>{
     return <>
       <div id="floating-panel" className="info">
         <h1>Success!</h1>
-        <div>The information already send to "{result.contact.email}"", see you soon!</div>
+        <div>The booking information already send to "{result.contact.email}", see you soon!</div>
       </div>
     </>
   }
