@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Coursera-Front-End-Developer-Capstone-Homework/static/css/main.8f6704f6.css",
+    "main.js": "/Coursera-Front-End-Developer-Capstone-Homework/static/js/main.ffbfbeb3.js",
+    "static/js/787.48ef2fa2.chunk.js": "/Coursera-Front-End-Developer-Capstone-Homework/static/js/787.48ef2fa2.chunk.js",
+    "index.html": "/Coursera-Front-End-Developer-Capstone-Homework/index.html",
+    "main.8f6704f6.css.map": "/Coursera-Front-End-Developer-Capstone-Homework/static/css/main.8f6704f6.css.map",
+    "main.ffbfbeb3.js.map": "/Coursera-Front-End-Developer-Capstone-Homework/static/js/main.ffbfbeb3.js.map",
+    "787.48ef2fa2.chunk.js.map": "/Coursera-Front-End-Developer-Capstone-Homework/static/js/787.48ef2fa2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f6704f6.css",
+    "static/js/main.ffbfbeb3.js"
+  ]
+}
