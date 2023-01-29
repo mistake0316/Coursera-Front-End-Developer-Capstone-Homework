@@ -1,0 +1,26 @@
+#header{
+  display: flex;
+  font-size: 2em;
+}
+
+#header > *{
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+  flex-basis: 0;
+}
+
+#header > *{
+  color:#485E57;
+  background-color:#F4CE14;
+}
+#header > .highlight{
+  color:#F4CE14;
+  background-color:#485E57;
+  cursor: default;
+}
+
+#header > :not(.highlight):hover{
+  font-weight: bold;
+  color: red;
+}

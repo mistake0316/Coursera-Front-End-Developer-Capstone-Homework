@@ -1,5 +1,5 @@
 #form {
-
+  color : white;
 }
 
 #form .list_data{
@@ -15,6 +15,7 @@
   padding: 0.2em;
   margin: 0.5em;
   cursor: pointer;
+  /* background-color: rgba(255,255,255, 0.3); */
 }
 
 #form .list_data > *:hover{
@@ -24,6 +25,7 @@
 
 #form .list_data > *.selected{
   background-color: rgba(0,255,0,0.7);
+  color: black;
   cursor: not-allowed;
   border-style: solid;
 }
@@ -65,6 +67,7 @@
   padding-right: 0.5em;
   border-color: black;
   border-style: dashed;
+  background-color: rgba(255,255,255, 0.3);
   cursor: pointer;
 }
 #form .but.disable{

@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactFragment, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Header from './Header';
 import {fetchAPI, submitAPI} from './fetchRelative';
 import Form from './ConfirmBooking';
 
@@ -22,6 +22,7 @@ function App() {
         currentPanel: FloatingPanelDom,
         setPanel:updatePanel
       }}>
+      <Header page="Booking Table"/>
       <div className="App">
         <Form/>
         {FloatingPanelDom}
